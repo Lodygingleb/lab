@@ -1,2 +1,76 @@
-temp
-*.tmp
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <vector>
+
+using namespace std;
+int simple (int p,int q)
+{
+	for (int i=2;i<=p/2;i++)
+	{
+		for (int i = 2; i <= p / 2; i++)
+		{
+			if (((p % i) != 0) and ((q % i) != 0))
+				return 1;
+			else
+			{
+				return 0;
+				break;
+			}
+		}
+	}
+}
+
+int inverse(int a, int m)
+{
+	for (int i = 1; i < m; i++)
+	{
+		if ((a % m) * (i % m) % m == 0)
+			return 0;
+	}
+}
+int main()
+{
+	int p, q, a;
+	int n, Fn, e, d;
+	cout << "Vvedite prostie chisla: " << endl;
+	cin >> p >> q;
+	a = simple(p, q);
+	if (a == 0) return 0;
+	n = p * q;
+	Fn = (p - 1) * (q - 1);
+	cout << "Vvedite vzaimno-prostoe chislo: " << endl;
+	cin >> e;
+	d = inverse(e, Fn);
+	cout << "Otkritie kluchi:";
+	cout << e << " " << n << endl;
+	cout << "Zakritie kluchi: ";
+	cout << d << " " << p << " " << q << " " << Fn << endl;
+	string M;
+	int C;
+	cout << "Vvedite otkritiy tekst: " << endl;
+	getline(cin, M);
+	getline(cin, M);
+	vector <unsigned long long> mas;
+	unsigned long long temp, temp1;
+	int z;
+	cout << "Shifrovanie:" << endl;
+	for (int i = 0; i < M.length(); i++)
+	{
+		z = M[i];
+		temp = pow(z, e);
+		temp = temp % n;
+		cout << mas[i] << " ";
+		cout << endl;
+	}
+	string D;
+	unsigned long long t;
+	cout << "Deshifrovanie: " << endl;
+	for (int i = 0; i < M.length(); i++)
+	{
+		temp1 = pow(mas[i], d);
+		t = temp1 % n;
+		D.push_back(t);
+		cout << D[i] << " ";
+	}
+}
